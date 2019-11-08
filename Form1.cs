@@ -37,6 +37,7 @@ namespace Ping
                 MessageBox.Show("IP输入不正确!", "错误");
                 return;
             }
+
             for (int i = int.Parse(textBox5.Text) - 1; i <= int.Parse(textBox6.Text) - 1; i++)
             {
                 var tableLabel = SearchLabelFromTableLayoutPanel((i + 1).ToString());
@@ -50,7 +51,7 @@ namespace Ping
                     {
                         ping = new System.Net.NetworkInformation.Ping();
 
-                        PingReply pingReply = ping.Send(ipAddress);
+                        PingReply pingReply = ping.Send(ipAddress, int.Parse(textBox7.Text));
                         var pingable = pingReply.Status == IPStatus.Success;
                         if (pingable)
                         {
@@ -121,9 +122,10 @@ namespace Ping
                     control = tableLayoutPanel1.Controls[i];
                 }
             }
+
             return control;
         }
-        
+
         private void PingStandalone()
         {
             label8.Text = "正在Ping";
@@ -134,7 +136,7 @@ namespace Ping
                 try
                 {
                     ping = new System.Net.NetworkInformation.Ping();
-                    PingReply pingReply = ping.Send(ipText);
+                    PingReply pingReply = ping.Send(ipText, int.Parse(textBox7.Text));
                     var pingable = pingReply.Status == IPStatus.Success;
                     if (pingable)
                     {
