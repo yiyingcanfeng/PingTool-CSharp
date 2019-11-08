@@ -113,18 +113,24 @@ namespace Ping
         /// </summary>
         private void StartPing()
         {
-            if (int.Parse(textBox2.Text) > 255 || int.Parse(textBox2.Text) <= 0 ||
-                int.Parse(textBox3.Text) > 255 || int.Parse(textBox3.Text) <= 0 ||
-                int.Parse(textBox4.Text) > 255 || int.Parse(textBox4.Text) <= 0 ||
-                int.Parse(textBox5.Text) > 255 || int.Parse(textBox5.Text) <= 0 ||
-                int.Parse(textBox6.Text) > 255 || int.Parse(textBox6.Text) <= 0)
+            if (int.Parse(textBox2.Text) > 255 || int.Parse(textBox2.Text) < 0 ||
+                int.Parse(textBox3.Text) > 255 || int.Parse(textBox3.Text) < 0 ||
+                int.Parse(textBox4.Text) > 255 || int.Parse(textBox4.Text) < 0 ||
+                int.Parse(textBox5.Text) > 255 || int.Parse(textBox5.Text) < 0 ||
+                int.Parse(textBox6.Text) > 255 || int.Parse(textBox6.Text) < 0)
             {
                 MessageBox.Show("IP输入不正确!", "错误");
                 return;
             }
 
             SaveConfig();
-
+            
+            for (int i = 0; i < tableLayoutPanel1.Controls.Count; i++)
+            {
+                var label = tableLayoutPanel1.Controls[i];
+                label.BackColor = Color.FromArgb(0, 240, 240, 240);
+            }
+            
             for (int i = int.Parse(textBox5.Text) - 1; i <= int.Parse(textBox6.Text) - 1; i++)
             {
                 var tableLabel = SearchLabelFromTableLayoutPanel((i + 1).ToString());
